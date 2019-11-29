@@ -9,5 +9,8 @@
         <module name="companyshow" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="companyshow" target="12" />
+    </bytecodeTargetLevel>
   </component>
 </project>
