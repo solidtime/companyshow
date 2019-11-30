@@ -1,0 +1,110 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('../font/iconfont.eot');
+  src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
+      url('../font/iconfont.woff2') format('woff2'),
+      url('../font/iconfont.woff') format('woff'),
+      url('../font/iconfont.ttf') format('truetype'),
+      url('../font/iconfont.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body{
+	margin: 0px;
+	padding: 0px;
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+ul{
+	margin: 0px;
+	padding: 0px;
+}
+#top{
+	height: 33px;
+	background-color: #424242;
+}
+#top .topcontainer{
+	width: 1019px;
+	margin: 0px auto;
+}
+#top .topcontainer li{
+	color: #d2d2d2;
+	font-size: 15px;
+	line-height: 33px;
+	margin-right: 14px;
+
+}
+#top .topcontainer a
+{
+	color: #d2d2d2;
+	font-size: 15px;
+}
+#top .topcontainer .subtopleft ul{
+	float: left;
+}
+#top .topcontainer .subtopleft .main{
+	font-size: 18px;
+}
+#top .topcontainer .subtopleft ul li{
+	float: left;
+}
+#top .topcontainer .regsiter ul{
+	float: right;
+}
+#top .topcontainer .regsiter ul li{
+	float: left;
+}
+#top .topcontainer .regsiter .containerlg{
+	position: relative;
+}
+#top .topcontainer .regsiter .login{	
+	width: 109px;
+	height: 79px;
+	position: absolute;	
+	top: 33px;
+	visibility: hidden;
+	border: 1px solid #66d0cd;
+	padding:0 12px 0 12px;
+}
+#top .topcontainer .containerlg .login li {	
+	color: #7d667d;
+}
+#top .topcontainer .containerlg .login li a{	
+	color: #7d667d;
+}
+#top .topcontainer .regsiter .login .button{	
+	border-bottom: 1px solid #7d667d;
+}
+#top .topcontainer .regsiter .containerlg:hover .login{
+	visibility: visible;	
+}
+#top .topcontainer .regsiter .containerrg .reg{	
+	width: 109px;
+	height: 79px;
+	position: absolute;	
+	top: 33px;
+	visibility: hidden;
+	border: 1px solid #66d0cd;
+	padding:0 12px 0 12px;
+}
+#top .topcontainer .regsiter .containerrg .reg .regbutton{	
+	border-bottom: 1px solid #7d667d;
+}
+#top .topcontainer .regsiter .containerrg .reg li {	
+	color: #7d667d;
+}
+#top .topcontainer .regsiter .containerrg .reg li a{	
+	color: #7d667d;
+}
+#top .topcontainer .regsiter .containerrg:hover .reg{
+	visibility: visible;	
+}

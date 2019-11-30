@@ -1,0 +1,44 @@
+{
+  "id": "1538301",
+  "name": "job",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "21329",
+      "name": "手机",
+      "font_class": "shouji",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "1172731",
+      "name": "用户",
+      "font_class": "user-copy",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "2372430",
+      "name": "主页",
+      "font_class": "zhuye",
+      "unicode": "e6b1",
+      "unicode_decimal": 59057
+    },
+    {
+      "icon_id": "3484344",
+      "name": "下 拉",
+      "font_class": "xiala",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "3875009",
+      "name": "企业",
+      "font_class": "qi",
+      "unicode": "e705",
+      "unicode_decimal": 59141
+    }
+  ]
+}
