@@ -1,0 +1,128 @@
+
+
+body{
+	margin: 0;
+	padding: 0;
+}
+
+#top{
+	width: 100%;
+	height: 50px;
+	background-color:#222222;
+	}
+#top span{
+	display: block;
+	float: left;
+	color: #ffffff;
+	line-height: 50px;
+	font-size: 30px;
+	font-weight: bold;
+	margin-left: 45px;
+}
+#top .middle ul {
+	width: 720px;
+	margin: 0 auto;	
+}
+#top .middle ul li{	
+	float: left;
+	color: #ffffff;
+	line-height: 50px;
+	font-size: 30px;
+	font-weight: bold;	
+}
+#top .middle ul li a{
+	color: #fffff;
+	text-decoration: none;
+}
+
+#present{
+	margin: 0px auto;
+	width: 1920px;
+	height: 3700px;
+	background-color: #eaeaea;
+}
+#present .one{
+	width: 100%;
+	height: 790px;
+}
+#present .second{
+	margin-top: 20px;
+	width: 100%;
+	height: 799px;
+}
+#present .three{
+	margin-top: 20px;
+	width: 100%;
+	height: 650px;	
+}
+#present ul li{
+	float: left;	
+}
+#present .one_01{
+	position: relative;
+	width: 885px;
+	height: 595px;
+	background: url(../img/list_03.png) no-repeat 0 0;
+	margin-top: 20px;
+	margin-left: 60px;
+}
+#present .two_02{
+	position: relative;
+	width: 885px;
+	height: 595px;
+	background: url(../img/list_05.png) no-repeat 0 0;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+#present .three_03{
+	position: relative;
+	width: 885px;
+	height: 595px;
+	background: url(../img/list_09.png) no-repeat 0 0;
+	margin-left: 60px;
+}
+#present .four_04{
+	position: relative;
+	width: 885px;
+	height: 595px;
+	background: url(../img/list_10.png) no-repeat 0 0;
+	margin-left: 20px;
+}
+
+
+#present .one_01 a{
+	position: relative;
+	display: inline-block;
+	color: #000000;
+	font-size: 20px;
+	font-weight: bold;	
+	left: 43px;
+	top: 516px;
+}
+#present .two_02 a{
+	position: relative;
+	display: inline-block;
+	color: #000000;
+	font-size: 20px;
+	font-weight: bold;	
+	left: 43px;
+	top: 516px;
+}
+#present .three_03 a{
+	position: relative;
+	display: inline-block;
+	color: #000000;
+	font-size: 20px;
+	font-weight: bold;	
+	left: 43px;
+	top: 516px;
+}
+#present .four_04 a{
+	position: relative;
+	display: inline-block;
+	color: #000000;
+	font-size: 20px;
+	font-weight: bold;	
+	left: 43px;
+	top: 516px;
+}
