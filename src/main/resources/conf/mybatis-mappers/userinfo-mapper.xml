@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solidtime.companyshow.dao.UserInfoDao">
+
+    <select id="getUserInfoById" resultType="com.solidtime.companyshow.bean.UserInfo">
+        SELECT * FROM user_info WHERE id=#{id}
+    </select>
+
+    <select id="getUserInfos" resultType="com.solidtime.companyshow.bean.UserInfo">
+        SELECT * FROM user_info
+    </select>
+
+    <insert id="insertUserInfo">
+        INSERT INTO user_info(name,password,displayname) VALUES(#{name},#{password},#{displayname})
+    </insert>
+
+    <delete id="deleteUserInfo">
+        DELETE FROM user_info WHERE id=#{id}
+    </delete>
+
+    <update id="updateUserInfo">
+        UPDATE user_info
+        <set>
+            <if test="name!=null and !name.equals('')">name=#{name}</if>
+            <if test="password!=null and !password.equals('')">password=#{password}</if>
+            <if test="displayname!=null and !displayname.equals('')">displayname=#{displayname}</if>
+        </set>
+    </update>
+</mapper>

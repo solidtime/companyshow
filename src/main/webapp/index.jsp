@@ -106,9 +106,10 @@
                 var h1=document.getElementById('tab-div').clientHeight;
                 var h2=document.getElementById('tab-ul').clientHeight;
                 var h=h1-h2-50;
+
                 element.tabAdd('tab-page',{
                     title:this.innerText
-                    ,content: "<iframe id='contain-iframe' src="+this.href+" height="+h+" frameborder='no' width='100%'></iframe>"
+                    ,content: $.ajax({url:this.href+"?number="+Math.random(),async:false,cache:false}).responseText
                     ,id:ramid
                 })
                     //切换到刚新增的Tab项

@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
     <title>Title</title>
 </head>
 <body>
-user_manager_page
+11111
+<table id="demo" lay-filter="test"></table>
+
+<script>
+
+        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+        var curWwwPath=window.document.location.href;
+        //获取主机地址之后的目录，如： myproj/view/my.jsp
+        var pathName=window.document.location.pathname;
+        var pos=curWwwPath.indexOf(pathName);
+        //获取主机地址，如： http://localhost:8083
+        var localhostPaht=curWwwPath.substring(0,pos);
+        //获取带"/"的项目名，如：/myproj
+        var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+        //得到了 http://localhost:8083/myproj
+        realPath=localhostPaht+projectName;
+
+    var tab=document.getElementById('demo');
+    tab.id=new Date().getTime();
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#'+tab.id
+            ,height: 312
+            ,url: realPath+'/userinfos' //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                ,{field: 'name', title: '用户名', width:80, sort: true}
+                ,{field: 'password', title: '密码', width:80}
+                ,{field: 'displayname', title: '昵称', width:80, sort: true}
+            ]]
+        });
+    });
+
+</script>
 </body>
 </html>
