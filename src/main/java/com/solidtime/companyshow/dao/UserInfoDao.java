@@ -14,9 +14,9 @@ public interface UserInfoDao {
     //获取所有【用户信息】
     List<UserInfo> getUserInfos();
     //添加一条【用户信息】
-    int insertUserInfo(UserInfo userInfo);
+    Integer insertUserInfo(UserInfo userInfo);
     //删除一条【用户信息】
-    int deleteUserInfo(Integer id);
+    Integer deleteUserInfo(Integer id);
     //更新一条【用户信息】
-    int updateUserInfo(UserInfo userInfo);
+    Integer updateUserInfo(UserInfo userInfo);
 }

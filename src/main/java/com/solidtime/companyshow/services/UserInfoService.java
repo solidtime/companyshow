@@ -24,15 +24,15 @@ public class UserInfoService {
         return userInfoDao.getUserInfos();
     }
 
-    public int insertUserInfo(UserInfo userInfo){
+    public Integer insertUserInfo(UserInfo userInfo){
         return userInfoDao.insertUserInfo(userInfo);
     }
 
-    public int deleteUserInfo(Integer id){
+    public Integer deleteUserInfo(Integer id){
         return userInfoDao.deleteUserInfo(id);
     }
 
-    public int updateUserInfo(UserInfo userInfo){
+    public Integer updateUserInfo(UserInfo userInfo){
         return userInfoDao.updateUserInfo(userInfo);
     }
 }

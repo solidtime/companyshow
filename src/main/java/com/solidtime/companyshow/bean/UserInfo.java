@@ -18,6 +18,16 @@ public class UserInfo {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", displayname='" + displayname + '\'' +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

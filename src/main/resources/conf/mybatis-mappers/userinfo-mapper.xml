@@ -24,9 +24,10 @@
     <update id="updateUserInfo">
         UPDATE user_info
         <set>
-            <if test="name!=null and !name.equals('')">name=#{name}</if>
-            <if test="password!=null and !password.equals('')">password=#{password}</if>
-            <if test="displayname!=null and !displayname.equals('')">displayname=#{displayname}</if>
+            <if test="name!=null and !name.equals('')">name=#{name},</if>
+            <if test="password!=null and !password.equals('')">password=#{password},</if>
+            <if test="displayname!=null and !displayname.equals('')">displayname=#{displayname},</if>
         </set>
+        WHERE id=#{id}
     </update>
 </mapper>

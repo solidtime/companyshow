@@ -3,44 +3,230 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
     <title>Title</title>
+
+    <style type="text/css">
+        .layui-table-cell .layui-form-checkbox[lay-skin="primary"]{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
 </head>
 <body>
-11111
-<table id="demo" lay-filter="test"></table>
+<!--
+<div id="toolbar" class="layui-btn-group">
+    <button class="layui-btn" type="button" data-method="offset" data-type="auto" data-url="/pages/user_info_edit.html"><i class="layui-icon layui-icon-add-circle"></i>增加</button>
+    <button class="layui-btn layui-btn-danger" type="button" data-method="" data-type="auto"><i class="layui-icon layui-icon-delete"></i>删除</button>
+    <button class="layui-btn layui-btn-normal" type="button" data-method="" data-type="auto"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
+</div>-->
+
+<script id="tabletoolbarleft" type="text/html">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add" data-type="auto" data-url="/pages/user_info_edit.html"><i class="layui-icon layui-icon-add-circle"></i>新增</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</button>
+        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
+    </div>
+</script>
+
+<table id="demo" lay-filter="data-table" class="layui-hide"></table>
 
 <script>
+    /*------------【获取项目访问路径的根路径】--start*/
+    //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+    var curWwwPath=window.document.location.href;
+    //获取主机地址之后的目录，如： myproj/view/my.jsp
+    var pathName=window.document.location.pathname;
+    var pos=curWwwPath.indexOf(pathName);
+    //获取主机地址，如： http://localhost:8083
+    var localhostPaht=curWwwPath.substring(0,pos);
+    //获取带"/"的项目名，如：/myproj
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+    //得到了 http://localhost:8083/myproj
+    realPath=localhostPaht+projectName;
+    /*------------【获取项目访问路径的根路径】--end*/
 
-        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
-        var curWwwPath=window.document.location.href;
-        //获取主机地址之后的目录，如： myproj/view/my.jsp
-        var pathName=window.document.location.pathname;
-        var pos=curWwwPath.indexOf(pathName);
-        //获取主机地址，如： http://localhost:8083
-        var localhostPaht=curWwwPath.substring(0,pos);
-        //获取带"/"的项目名，如：/myproj
-        var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-        //得到了 http://localhost:8083/myproj
-        realPath=localhostPaht+projectName;
+    /*-----------【使用Layui】--start--*/
+    layui.use(['table','layer','form'],function () {
+        var $=layui.jquery
+            ,table=layui.table
+            ,layer=layui.layer
+            ,form=layui.form;
 
-    var tab=document.getElementById('demo');
-    tab.id=new Date().getTime();
-    layui.use('table', function(){
-        var table = layui.table;
-        //第一个实例
+        /*-----------【layui-数据表格的相关操作】--start--*/
+
+        //>>>随机设置table的id，避免每个选项卡中的表格id相同，导致一个页面出现多个相同id的表格
+        var tab=document.getElementById('demo');
+        tab.id=new Date().getTime();
+
+        //>>>渲染表格
         table.render({
-            elem: '#'+tab.id
-            ,height: 312
+            elem: '#'+tab.id//表格的id，表示要渲染哪一个表格
+            /*,height: 312*/
             ,url: realPath+'/userinfos' //数据接口
             ,page: true //开启分页
+            ,toolbar: '#tabletoolbarleft'//开启工具栏
             ,cols: [[ //表头
-                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-                ,{field: 'name', title: '用户名', width:80, sort: true}
-                ,{field: 'password', title: '密码', width:80}
-                ,{field: 'displayname', title: '昵称', width:80, sort: true}
+                {type:'checkbox',fixed: 'left'}//在行的前面显示复选框
+                ,{field: 'id', title: 'ID', width:80, sort: true}
+                ,{field: 'name', title: '用户名', sort: true}
+                ,{field: 'password', title: '密码'}
+                ,{field: 'displayname', title: '昵称', sort: true}
+                ,{fixed: 'right',width:150,align:'center',toolbar:'#tab-toolbar',title:'功能'}//在每行的后面显示工具栏
             ]]
         });
-    });
 
+        //>>>表格每行后的工具栏的事件绑定
+        table.on('tool(data-table)',function (obj) {
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+
+                    //向服务端发送删除指令
+                    $.ajax({url:realPath+"/userinfos/"+data.id,type:"DELETE"});
+
+                   obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+
+                });
+            } else if(layEvent === 'edit'){ //编辑
+
+                active['offset'].call(this,$(this));
+                form.val('userEditForm',{
+                    "id":data.id
+                    ,"name":data.name
+                    ,"password":data.password
+                    ,"displayname":data.displayname
+                });
+                $('#form-submit-button').data('type','edit');
+            } else if(layEvent === 'LAYTABLE_TIPS'){
+                layer.alert('Hi，头部工具栏扩展的右侧图标。');
+            }
+        })
+
+        //>>>layui-table头工具栏的事件
+        //头工具栏事件
+        table.on('toolbar(data-table)', function(obj){
+
+            var checkStatus = table.checkStatus(obj.config.id);//获取选中行的数据
+
+            switch(obj.event){
+                case 'add'://表格工具栏的新增按钮点击事件
+                    active['offset'].call(this,$(this));
+                    break;
+                case 'del':
+                    if(checkStatus.data.length===0){
+                        layer.msg("请选择一行");
+                        return false;
+                    }
+
+                    layer.confirm('真的删除行么', function(index){
+                        var data = checkStatus.data;
+                        data.forEach(function (item,index) {
+                            $.ajax({
+                                url:realPath+"/userinfos/"+item.id
+                                ,type:"DELETE"
+                                ,success:function () {
+                                    table.reload(tab.id);//刷新table的数据
+                                }});
+                        });
+
+                        layer.close(index);
+
+                    });
+                    break;
+                case 'refresh':
+                    table.reload(tab.id);//刷新table的数据
+                    break;
+
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            };
+        });
+        /*-----------【layui-数据表格的相关操作】--end--*/
+
+        /*-----------【layui-layer弹出层的相关操作】--start--*/
+
+        //>>>渲染弹出层
+        var active={
+            ccc:function () {
+                alert('eeee');
+            }
+            ,offset:function (othis) {
+                var type=othis.data('type'),text=othis.text();
+                layer.open({
+                    type: 1
+                    ,title:text
+                    ,area: ['390px']
+                    ,offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                    ,id: 'layerDemo'+type //防止重复弹出
+                    ,content: $.ajax({url:realPath+othis.data('url')+"?number="+Math.random(),async:false,cache:false}).responseText
+                    ,btn: ['确定','取消']
+                    ,btnAlign: 'c' //按钮居中
+                    ,shade: 0 //不显示遮罩
+                    ,yes: function(index,layero){
+                        /*document.userForm.submit();//动态提交表单*//*这样不会触发layui表单的验证功能(userForm是表单的name)*/
+                        document.getElementById('user-form').action=realPath+'/userinfos';
+                        document.getElementById('form-submit-button').click();
+                    }
+                    ,btn2:function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        };
+
+        //>>>绑定弹出层到指定组件
+        /*$('#toolbar .layui-btn,#line-toolbar-edit').on('click', function(){
+            var othis = $(this), method = othis.data('method')
+            active[method] ? active[method].call(this, othis) : '';
+        });*/
+        /*-----------【layui-layer弹出层的相关操作】--end--*/
+
+        /*-----------【layui-form的相关操作】--start--*/
+        /*【自定义表单验证】--start*/
+        form.verify({
+            verifyNotNull:function (value) {
+                if(value.length<1){return '不允许为空!'};
+            }
+        });
+        /*【自定义表单验证】--end*/
+
+        form.on('submit(verifyNotNull)',function (data) {
+
+            var type=$(this).data('type');//通过type属性来判断是修改还是新增
+
+            if(type=="edit"){//若是新增则设置为发送put请求，否则默认post请求
+                data.field._method="put";
+            }
+
+            $.ajax({
+                url:realPath+"/userinfos"
+                ,type:"post"
+                ,data:data.field
+                ,success:function () {
+                    table.reload(tab.id);//刷新table的数据
+                }
+                ,error:function () {
+                    table.reload(tab.id);//刷新table的数据
+                }
+            });
+
+            layer.closeAll();
+            return false;
+        });
+        /*-----------【layui-form的相关操作】--end--*/
+    });
+    /*-----------【使用Layui】--end--*/
+</script>
+
+
+<script type="text/html" id="tab-toolbar">
+    <a id="line-toolbar-edit" class="layui-btn layui-btn-xs" lay-event="edit" data-type="auto" data-url="/pages/user_info_edit.html">编辑</i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 </body>
 </html>

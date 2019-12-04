@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>用户信息编辑</title>
+</head>
+<body>
+<div style="padding: 20px;padding-bottom: 0; line-height: 22px; font-weight: 300;">
+    <form id="user-form" lay-filter="userEditForm" class="layui-form layui-form-pane" action="" method="post" target="nm_iframe">
+        <div class="layui-form-item" style="display: none">
+            <label class="layui-form-label">ID</label>
+            <div class="layui-input-block">
+                <input name="id" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input name="name" class="layui-input numAlpha" type="text" placeholder="请输入用户名" autocomplete="off" lay-verify="verifyNotNull">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input name="password" class="layui-input" type="text" placeholder="请输入密码" autocomplete="off" lay-verify="verifyNotNull">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-block">
+                <input name="displayname" class="layui-input" type="text" placeholder="请输入昵称" autocomplete="off">
+            </div>
+        </div>
+
+        <!--【隐藏的提交按钮】-start-->
+        <div class="layui-form-item" style="display: none">
+            <div class="layui-input-block">
+                <button id="form-submit-button" class="layui-btn" lay-filter="verifyNotNull" data-type="add" lay-submit>添加</button>
+            </div>
+        </div>
+        <!--【隐藏的提交按钮】-end-->
+    </form>
+    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+</div>
+
+<script src="resources/js/jquery-3.4.1.min.js" charset="utf-8"></script>
+
+<script>
+
+    /*【实时验证--只允许输入数字、字母、-】--start*/
+    $('.numAlpha').on("input propertychange", function () {
+        var val = $(this).val();
+        val = val.replace(/[^\w#\.\/\-]/ig, '');
+        $(this).val(val);
+    });
+    /*【实时验证--只允许输入数字、字母、-】--end*/
+
+</script>
+</body>
+</html>

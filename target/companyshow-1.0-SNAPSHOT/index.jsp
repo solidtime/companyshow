@@ -91,7 +91,8 @@
 
 </div>
 
-<script src="resources/layui/layui.all.js" charset="utf-8"></script>
+<%--<script src="resources/layui/layui.all.js" charset="utf-8"></script>--%>
+<script src="resources/layui/layui.js" charset="utf-8"></script>
 
 <script>
     layui.use('element',function () {
